@@ -15,6 +15,15 @@ button.onclick=()=>{
     lastText.innerText = "Game will Start Again.";
     lastText.style.color = "cadetblue"
 }
+function autoReset(){ setTimeout(()=>{
+   
+    userPoint=0;
+    pcPoint=0;
+    user.innerText="0";
+    pc.innerText="0";
+  lastText.innerText="Game reseted";
+
+},2000)};
 
 
 let choices = document.querySelectorAll(".choice");
@@ -35,7 +44,9 @@ let selectId = document.getElementById(pat);
 
 
 };
-let checkWinner = (userwin, userValue, pcValue) =>{
+let checkWinner = (userwin, userValue, pcValue) =>{ 
+  
+
    if(userwin){
     
     userPoint++;
@@ -50,9 +61,26 @@ let checkWinner = (userwin, userValue, pcValue) =>{
      lastText.innerText = `${pcValue} defeated Your ${userValue}`;
      lastText.style.color = "red";
 
-   }
+   } 
+ 
+   if(userPoint === 5
+    || pcPoint === 5){   
+         if (userPoint<=5){
+        let diff = userPoint - pcPoint;
+        lastText.innerText = `After 5round, Your beat Pc by ${diff} move. Game will restart after 2sec`;
+        lastText.style.color = "green";
 
+    }
+   
+    if (pcPoint===5){
+        let diff = pcPoint - userPoint;
+        lastText.innerText = `After 5round, Pc beat you by ${diff} move. Game Will Restart after 2sec`;
+        lastText.style.color = "red"; }
+        autoReset();
 }
+}
+
+
 
 choices.forEach((choice)=>{
     choice.addEventListener(("click"), ()=>
@@ -63,7 +91,10 @@ choices.forEach((choice)=>{
 })
 
 const playGame = (userValue) =>{
-    const pcValue = pcChoice();
+    const pcValue = pcChoice(); 
+  
+   
+ 
 if(pcValue === userValue){ 
 
  lastText.innerText = `Game has been Drawed. Both was selected ${pcValue}`;
@@ -79,7 +110,7 @@ else if (userValue==="rock"){
 }
 else if(userValue==="scissore"){
     userwin = pcValue == "rock" ? false : true;
-}
+} 
 checkWinner(userwin, userValue, pcValue);
 }
-};
+}
