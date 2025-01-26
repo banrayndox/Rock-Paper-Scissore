@@ -45,7 +45,7 @@ let selectId = document.getElementById(pat);
 
 };
 let checkWinner = (userwin, userValue, pcValue) =>{ 
-  
+    if (userPoint >= 5 || pcPoint >= 5) return;
 
    if(userwin){
     
@@ -114,3 +114,4 @@ else if(userValue==="scissore"){
 checkWinner(userwin, userValue, pcValue);
 }
 }
+
